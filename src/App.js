@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, NavLink} from "react-router-dom";
 import MoviesIndexContainer from './containers/MoviesIndexContainer';
-import MoviesFormContainer from './containers/MovieFormContainer';
+import MovieFormContainer from './containers/MovieFormContainer';
 
 
 
@@ -27,10 +27,15 @@ function App() {
         </NavLink>
       </nav>
         <Switch>
+
           <Route exact path="/"> 
           <MoviesIndexContainer/>
           </Route>
-          <Route path="/movies/new"> New Movie</Route>
+
+          <Route path="/movies/new">
+            <MovieFormContainer/>
+          </Route>
+          
         </Switch>
       </Router>
       
