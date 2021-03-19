@@ -1,10 +1,13 @@
 import React from 'react';
+import MovieListItem from './MovieListItem';
 
 const MovieList = ({movies}) => {
     return (
         <>
+        <h1>Movies:</h1>
+        <br></br>
         <ul>
-         <h1>Movie List</h1>
+         {movies.map(movies => <MovieListItem key={movies.id} movie={movies}/>)}
         </ul>
         </>
     )
