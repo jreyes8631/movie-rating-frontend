@@ -32,8 +32,8 @@ function App() {
           <MoviesIndexContainer/>
           </Route>
 
-          <Route path="/movies/new">
-            <MovieFormContainer/>
+          <Route path="/movies/new" component={MovieFormContainer}>
+            
           </Route>
           
         </Switch>
