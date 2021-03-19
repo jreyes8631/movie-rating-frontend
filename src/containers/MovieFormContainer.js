@@ -31,7 +31,7 @@ export default class MovieFormContainer extends Component {
 
    .then(res => res.json())
    .then(movieJson => {
-    debugger
+    this.props.history.push('/')
    })
 
   }
