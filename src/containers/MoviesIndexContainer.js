@@ -9,19 +9,27 @@ export default class MoviesIndexContainer extends Component {
     }
 
     componentDidMount() {
-     this.setState({
-         movies: [
-         {title: 'Black Phanter'}, 
-         {title: 'Avengers: End game'}, 
-         {title: 'The mommy'}],
-         loading: false
+     fetch('http://localhost:3001/movies', { 
+         method: 'GET',
+         headers: {
+             'Accept': 'application/json',
+             'Content-Type': 'application/json'
+         }
      })
+
+       .then(res => res.json())
+       .then(moviesJson => {
+        this.setState({
+            movies: moviesJson,
+            loading: false
+        })
+       })
     }
 
     render(){
         return (
-            <section className="max-w-6xl mx-auto mt-16">
-               { this.state.loading ? 'Loading spinner' : < MovieList movies={this.state.movies}/>}
+            <section className="max-w-6xl w-11/12 mx-auto mt-16">
+               { this.state.loading ? 'Loading content' : < MovieList movies={this.state.movies}/>}
             </section>
         )
     }
