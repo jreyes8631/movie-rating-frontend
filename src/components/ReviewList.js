@@ -5,6 +5,7 @@ const ReviewList = ({reviews}) => {
   return (
      <>
      <h1>Reviews:</h1>
+     <br></br>
         <ul>
          {reviews.map(review => <ReviewListItem key={review.id} review={review}/>)}
         </ul>

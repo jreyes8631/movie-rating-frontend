@@ -3,7 +3,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, NavLink} from "react-router-dom";
 import MoviesIndexContainer from './containers/MoviesIndexContainer';
 import MovieFormContainer from './containers/MovieFormContainer';
-import ReviewIndexContainer from "./containers/ReviewsIndexContainer";
+import ReviewIndexContainer from "./containers/ReviewIndexContainer";
+import NewReviewContainer from "./containers/NewReviewContainer";
 
 
 
@@ -29,9 +30,10 @@ function App() {
           New Movie
         </NavLink>
 
-         <NavLink 
+        <NavLink 
           className="inline-block p-2" to="/reviews"
           activeClassName="text-yellow-300"
+          exact
         >
           Reviews
         </NavLink>
@@ -40,18 +42,14 @@ function App() {
       </nav>
         <Switch>
 
-          <Route exact path="/"> 
-          <MoviesIndexContainer/>
-          </Route>
-
-          <Route path="/movies/new" component={MovieFormContainer}>
-            
-          </Route>
-
-          <Route exact path='/reviews'>
-            <ReviewIndexContainer/>
-          </Route>
+          <Route exact path="/" component={MoviesIndexContainer}/> 
           
+          <Route path="/movies/new" component={MovieFormContainer}/>
+
+          <Route path="/movies/:movie_id/reviews/new" component={NewReviewContainer}/>
+
+          <Route exact path='/reviews' component={ReviewIndexContainer}/>
+        
         </Switch>
       </Router>
       
