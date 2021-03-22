@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       
       <Router>
-        <nav className="text-center bg-blue-900 text-yellow-100 p-4">
+        <nav className="text-center bg-blue-500 text-yellow-100 p-4">
         <NavLink 
           className="inline-block p-2" to="/"
           activeClassName="text-yellow-300"
