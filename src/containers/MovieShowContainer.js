@@ -57,6 +57,7 @@ export default class MovieShowContainer extends Component {
                 <React.Fragment key={review.id}>
                 <h2>rating: {review.rating}</h2>
                 <h3>review: {review.comment}</h3>
+                <br></br>
                 </React.Fragment>
                 )
               })
