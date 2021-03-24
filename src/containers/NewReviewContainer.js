@@ -1,15 +1,40 @@
 import React, { Component} from 'react';
 
 export default class NewReviewContainer extends Component {
-  
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const body = new FormData();
-        body.append('review[comment]', form.name.value);
-        body.append('review[comment]', form.name.value);
-        debugger
+
+
+    state = {
+        comment: "",
+        rating: ""
     }
+  
+   handleChange = (e) =>{
+   this.setState({
+       [e.target.name]: e.target.value
+   })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const movieId = this.props.match.params.movie_id
+    fetch(`http://localhost:3001/movies/${movieId}/reviews`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({review: this.state})
+    })
+    
+
+    .then(res => res.json())
+    .then(reviewJson => {
+        console.log(reviewJson);
+       this.props.history.push(`/movies/${movieId}/reviews`) 
+   })
+   
+
+  }
     
 
     render(){
@@ -22,9 +47,11 @@ export default class NewReviewContainer extends Component {
                     <label htmlFor="comment" className="w-full p-2 my-2 block uppercase"> Comment</label>
                     <input 
                         type="text"
-                        name="Comment"
+                        name="comment"
                         id="comment"
-                        placeholder="Comment"
+                        placeholder="comment"
+                        onChange={this.handleChange}
+                        value={this.state.comment}
                         className="w-full border-2 p-4 my-4"
                     />
                 </fieldset>
@@ -37,6 +64,8 @@ export default class NewReviewContainer extends Component {
                         name="rating"
                         id="rating"
                         placeholder="rating"
+                        onChange={this.handleChange}
+                        value={this.state.rating}
                         className="w-full border-2 p-4 my-4"
                     />
                 </fieldset>
