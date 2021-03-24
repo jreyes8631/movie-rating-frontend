@@ -5,6 +5,8 @@ import MoviesIndexContainer from './containers/MoviesIndexContainer';
 import MovieFormContainer from './containers/MovieFormContainer';
 import ReviewIndexContainer from "./containers/ReviewIndexContainer";
 import NewReviewContainer from "./containers/NewReviewContainer";
+import MovieShowContainer from "./containers/MovieShowContainer";
+
 
 
 
@@ -38,17 +40,33 @@ function App() {
           Reviews
         </NavLink>
 
+          
+
 
       </nav>
         <Switch>
 
-          <Route exact path="/" component={MoviesIndexContainer}/> 
+          <Route 
+          exact path="/" 
+          component={MoviesIndexContainer}/> 
           
-          <Route path="/movies/new" component={MovieFormContainer}/>
+          <Route 
+          path="/movies/new" 
+          component={MovieFormContainer}/>
 
-          <Route path="/movies/:movie_id/reviews/new" component={NewReviewContainer}/>
+          <Route 
+          path="/movies/:movie_id/reviews/new" 
+          component={NewReviewContainer}/>
 
-          <Route exact path='/reviews' component={ReviewIndexContainer}/>
+          <Route 
+          path="/movies/:id" 
+          component={MovieShowContainer}/>
+
+         <Route 
+          exact 
+          path='/reviews' 
+          component={ReviewIndexContainer}/>
+          
         
         </Switch>
       </Router>
