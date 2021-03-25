@@ -1,4 +1,5 @@
 import React, { Component} from 'react';
+import { Link } from 'react-router-dom';
 
 export default class NewReviewContainer extends Component {
 
@@ -39,7 +40,7 @@ export default class NewReviewContainer extends Component {
 
     render(){
         return (
-            
+            <>
             <form onSubmit={this.handleSubmit} className="max-w-6xl mt-16 w-4/6 mx-auto shadow-lg">
                 
                 <fieldset>
@@ -71,7 +72,10 @@ export default class NewReviewContainer extends Component {
                 </fieldset>
                 
                 <button className="w-full p-4 bg-blue-300 mt-4 hover:bg-blue-400 transition-all duration-200" type="submit"> Add Review</button>
+                 <button className="inline-block border border-blue-500 rounded py-2 px-3 bg-blue-500 text-white mx-0.5" type="button"><Link to={`/`}>CANCEL</Link></button>
             </form>
+            
+            </>
         );
     }
 
