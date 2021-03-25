@@ -45,10 +45,10 @@ export default class MovieShowContainer extends Component {
                 <br></br>
                 <h1>Description: {this.state.movie.description}</h1>
                 <br></br>
-                <h1 className="font-bold"><Link to={`/movies/${this.state.movie.id}/reviews/new`}>Create a review</Link></h1>
+               
 
             </section>
-            
+            <button className="inline-block border border-blue-500 rounded py-2 px-3 bg-blue-500 text-white mx-44" type="button"><Link to={`/movies/${this.state.movie.id}/reviews/new`}>CREATE A REVIEW</Link></button>
 
             
             <div className="max-w-6xl w-11/12 mx-auto mt-16">
@@ -63,8 +63,9 @@ export default class MovieShowContainer extends Component {
               })
               
               }
+             
               </div>
-            
+            <button className="inline-block border border-blue-500 rounded py-2 px-3 bg-blue-500 text-white mx-44" type="button"><Link to={`/`}>BACK</Link></button>
           </>
            
         );
