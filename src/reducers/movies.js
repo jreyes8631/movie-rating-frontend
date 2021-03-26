@@ -1,12 +1,15 @@
 import { 
-  ADD_MOVIE,
+  // ADD_MOVIE,
   START_LOADING_MOVIES,
   SUCCESSFULLY_LOADED_MOVIES,
-  FAILED_LOADING_MOVIES
+  SUCCESSFULLY_LOADED_MOVIE_REVIEWS,
+  // FAILED_LOADING_MOVIES
+  
+  
 } from '../actions';
 
 const initialState = {
-    loadingState: "notStarted",
+    LoadingState: "notStarted",
     movieList: []
 }
 
@@ -15,13 +18,27 @@ export default function MoviesReducer(state = initialState,
    switch (action.type) {
       case START_LOADING_MOVIES:
 
-       return {...state, loadingState: 'inProgress'}
-
+       return {...state, LoadingState: 'inProgress'}
+      
       case SUCCESSFULLY_LOADED_MOVIES:
 
         return {
           movieList: action.payload, 
-          loadingState: 'Successfull'}
+          LoadingState: 'Successfull'
+        };
+
+      case SUCCESSFULLY_LOADED_MOVIE_REVIEWS:
+        const foundMovie = state.movieList.find(movie => movie.id === action.payload.movie.id)
+        if(foundMovie) {
+          return { 
+            state
+          } 
+        } else {
+          return {
+              ...state,
+             movieList: state.movieList.concat(action.payload.movie),
+            }
+        }
 
       default:
 
