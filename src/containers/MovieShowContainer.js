@@ -1,54 +1,46 @@
 import React, { Component, Fragment} from 'react';
+import {connect} from 'react-redux'
 import { Link } from 'react-router-dom';
+import {fetchMoviesById} from '../actions/movies'
 
-export default class MovieShowContainer extends Component {
 
-    state = {
-        movie: {},
-        reviews: [],
-        loading: true
-    }
+
+export  class MovieShowContainer extends Component {
+
+    
 
   componentDidMount(){
-    const MovieId = this.props.match.params.id
-    fetch(`http://localhost:3001/movies/${MovieId}`)
-    .then (res => res.json())
-    .then(({movie, reviews}) => {
-        this.setState({
-            movie,
-            reviews,
-            loading: false
-        })
-    })
+    const movieId = this.props.match.params.id
+    this.props.DispatchfetchMovies(movieId)
   }
     
 
     render() {
-        if (this.state.loading){
+        if (this.props.loadingState !== "successfull"){
             return <div>Loading content</div>
         }
 
         return (
             <>
             <section className="max-w-6xl w-11/12 mx-auto mt-16">
-                <h1 >Title: {this.state.movie.title}</h1>
+                <h1 >Title: {this.props.movie.title}</h1>
                 <br></br>
-                <h1>Genre: {this.state.movie.genre}</h1>
+                <h1>Genre: {this.props.movie.genre}</h1>
                 <br></br>
-                <h1>Classification: {this.state.movie.classification}</h1>
+                <h1>Classification: {this.props.movie.classification}</h1>
                 <br></br>
-                <h1>Duration: {this.state.movie.duration}</h1>
+                <h1>Duration: {this.props.movie.duration}</h1>
                 <br></br>
-                <h1>Release: {this.state.movie.release_date}</h1>
+                <h1>Release: {this.props.movie.release_date}</h1>
                 <br></br>
-                <h1>Director: {this.state.movie.director}</h1>
+                <h1>Director: {this.props.movie.director}</h1>
                 <br></br>
-                <h1>Description: {this.state.movie.description}</h1>
+                <h1>Description: {this.props.movie.description}</h1>
                 <br></br>
                
 
             </section>
-            <button className="inline-block border border-blue-500 rounded py-2 px-3 bg-blue-500 text-white mx-44" type="button"><Link to={`/movies/${this.state.movie.id}/reviews/new`}>CREATE A REVIEW</Link></button>
+            <button className="inline-block border border-blue-500 rounded py-2 px-3 bg-blue-500 text-white mx-44" type="button"><Link to={`/movies/${this.props.movie.id}/reviews/new`}>CREATE A REVIEW</Link></button>
 
             
             <div className="max-w-6xl w-11/12 mx-auto mt-16">
@@ -70,4 +62,24 @@ export default class MovieShowContainer extends Component {
            
         );
     }
+};
+
+const mapStateToProps = (state, {match: {params} }) => {
+  const movieId = params.id
+  let loadingState = state.reviews.moviesLoaded[movieId] || "notSarted"
+  return {
+   movies: state.movies.movieList.find(movie => movie.id == movieId),
+   reviews: state.reviews.reviewList.filter(review =>  review.movie.id == movieId),
+   loadingState
+  };
+ 
+};
+
+const mapDispatchToProps = (dispatch) => {
+ return {
+   DispatchfetchMovies: (movieId) => dispatch(fetchMoviesById(movieId))
+ }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)
+(MovieShowContainer)
