@@ -1,6 +1,9 @@
 import { 
     START_LOADING_MOVIES,
-    SUCCESSFULLY_LOADED_MOVIES
+    SUCCESSFULLY_LOADED_MOVIES,
+    START_LOADING_MOVIE,
+    SUCCESSFULLY_LOADED_MOVIE_REVIEWS
+    
 } from './index'
 
 
@@ -22,5 +25,19 @@ export  const fetchMovies = () =>{
         
         })
        });
+    }
+}
+
+export  const fetchMoviesById = (movieId) =>{
+    return(dispatch) =>{
+        dispatch({type: START_LOADING_MOVIE, payload: movieId})
+
+        fetch(`http://localhost:3001/movies/${movieId}`)
+        .then (res => res.json())
+        .then((movieReviewsJson) => {
+           dispatch({type: SUCCESSFULLY_LOADED_MOVIE_REVIEWS,
+            payload: movieReviewsJson,
+        })
+        });
     }
 }
