@@ -30,9 +30,8 @@ export default function MoviesReducer(state = initialState,
       case SUCCESSFULLY_LOADED_MOVIE_REVIEWS:
         const foundMovie = state.movieList.find(movie => movie.id === action.payload.movie.id)
         if(foundMovie) {
-          return { 
-            state
-          } 
+          return state
+          
         } else {
           return {
               ...state,
