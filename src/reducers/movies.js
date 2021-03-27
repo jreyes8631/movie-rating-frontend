@@ -47,11 +47,7 @@ export default function MoviesReducer(state = initialState,
          movieList: state.movieList.concat(action.payload),
          errors: {}
         }
-      case ERROR_CREATING_MOVIE:
-       return {
-        ...state,
-        errors: action.payload
-       }
+     
 
       default:
 

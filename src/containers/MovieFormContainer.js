@@ -12,6 +12,7 @@ import {createMovie} from '../actions/movies'
     release_date: '',
     director: '',
     description: '',
+    errors: {}
   }
 
   handleChange = (e) =>{
@@ -25,6 +26,15 @@ import {createMovie} from '../actions/movies'
   this.props.dispachedCreateMovie(this.state).then(movieJson => {
     this.props.history.push('/')
    })
+
+   .catch(errors => {
+       this.setState({
+           errors
+       })
+       console.log(errors)
+   })
+
+   
 
   }
 
