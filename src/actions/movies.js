@@ -2,7 +2,9 @@ import {
     START_LOADING_MOVIES,
     SUCCESSFULLY_LOADED_MOVIES,
     START_LOADING_MOVIE,
-    SUCCESSFULLY_LOADED_MOVIE_REVIEWS
+    SUCCESSFULLY_LOADED_MOVIE_REVIEWS,
+    SUCCESSFULLY_CREATED_MOVIE,
+    ERROR_CREATING_MOVIE
     
 } from './index'
 
@@ -39,5 +41,32 @@ export  const fetchMoviesById = (movieId) =>{
             payload: movieReviewsJson,
         })
         });
+    }
+}
+
+export const createMovie = (formData) =>{
+    return(dispatch) =>{
+        return fetch('http://localhost:3001/movies', {
+            method: 'POST',
+            headers: {
+                "Accept": "application/json",
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({movie: formData})
+        })
+        .then(res => res.json())
+        .then(movieJson => {
+            dispatch({
+                type: SUCCESSFULLY_CREATED_MOVIE,
+                payload: movieJson,
+            });
+        })
+
+        .catch(errors => {
+            dispatch({
+                type:ERROR_CREATING_MOVIE,
+                payload: errors,
+            })
+        })
     }
 }
