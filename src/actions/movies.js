@@ -54,7 +54,14 @@ export const createMovie = (formData) =>{
             },
             body: JSON.stringify({movie: formData})
         })
-        .then(res => res.json())
+        .then(res => {
+           if (res.ok) {
+            return res.json()
+           } else {
+            return res.json().then(errors => Promise.reject(errors))
+           }
+        })
+            
         .then(movieJson => {
             dispatch({
                 type: SUCCESSFULLY_CREATED_MOVIE,
@@ -62,11 +69,6 @@ export const createMovie = (formData) =>{
             });
         })
 
-        .catch(errors => {
-            dispatch({
-                type:ERROR_CREATING_MOVIE,
-                payload: errors,
-            })
-        })
+       
     }
 }
