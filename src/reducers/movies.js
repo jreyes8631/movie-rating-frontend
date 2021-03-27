@@ -1,16 +1,18 @@
 import { 
-  // ADD_MOVIE,
+  
   START_LOADING_MOVIES,
   SUCCESSFULLY_LOADED_MOVIES,
   SUCCESSFULLY_LOADED_MOVIE_REVIEWS,
-  // FAILED_LOADING_MOVIES
+  SUCCESSFULLY_CREATED_MOVIE,
+  ERROR_CREATING_MOVIE
   
   
 } from '../actions';
 
 const initialState = {
     LoadingState: "notStarted",
-    movieList: []
+    movieList: [],
+    errors: {}
 }
 
 export default function MoviesReducer(state = initialState, 
@@ -38,6 +40,18 @@ export default function MoviesReducer(state = initialState,
              movieList: state.movieList.concat(action.payload.movie),
             }
         }
+
+      case SUCCESSFULLY_CREATED_MOVIE:
+        return {
+          ...state,
+         movieList: state.movieList.concat(action.payload),
+         errors: {}
+        }
+      case ERROR_CREATING_MOVIE:
+       return {
+        ...state,
+        errors: action.payload
+       }
 
       default:
 
