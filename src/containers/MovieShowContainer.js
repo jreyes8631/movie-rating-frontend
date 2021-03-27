@@ -48,7 +48,7 @@ export  class MovieShowContainer extends Component {
                return(
                 <React.Fragment key={review.id}>
                 <h2>rating: {review.rating}</h2>
-                <h3>review: {review.comment}</h3>
+                <h3>comment: {review.comment}</h3>
                 <br></br>
                 </React.Fragment>
                 )
