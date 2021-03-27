@@ -11,8 +11,7 @@ import {
 
 const initialState = {
     LoadingState: "notStarted",
-    movieList: [],
-    errors: {}
+    movieList: []
 }
 
 export default function MoviesReducer(state = initialState, 
@@ -45,7 +44,6 @@ export default function MoviesReducer(state = initialState,
         return {
           ...state,
          movieList: state.movieList.concat(action.payload),
-         errors: {}
         }
      
 
