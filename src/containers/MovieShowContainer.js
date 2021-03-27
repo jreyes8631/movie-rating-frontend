@@ -11,7 +11,7 @@ export  class MovieShowContainer extends Component {
 
   componentDidMount(){
     const movieId = this.props.match.params.id
-    this.props.DispatchfetchMovies(movieId)
+    this.props.dispatchFetchMovies(movieId)
   }
     
 
@@ -40,11 +40,11 @@ export  class MovieShowContainer extends Component {
                
 
             </section>
-            <button className="inline-block border border-blue-500 rounded py-2 px-3 bg-blue-500 text-white mx-44" type="button"><Link to={`/movies/${this.props.movie.id}/reviews/new`}>CREATE A REVIEW</Link></button>
+            <Link  className="inline-block border border-blue-500 rounded py-2 px-3 bg-blue-500 text-white mx-44" to={`/movies/${this.props.movie.id}/reviews/new`}>CREATE A REVIEW</Link>
 
             
             <div className="max-w-6xl w-11/12 mx-auto mt-16">
-              {this.state.reviews.map((review) => {
+              {this.props.reviews.map((review) => {
                return(
                 <React.Fragment key={review.id}>
                 <h2>rating: {review.rating}</h2>
@@ -57,7 +57,7 @@ export  class MovieShowContainer extends Component {
               }
              
               </div>
-            <button className="inline-block border border-blue-500 rounded py-2 px-3 bg-blue-500 text-white mx-44" type="button"><Link to={`/`}>BACK</Link></button>
+            <Link className="inline-block border border-blue-500 rounded py-2 px-3 bg-blue-500 text-white mx-44" to={`/`}>BACK</Link>
           </>
            
         );
@@ -68,16 +68,16 @@ const mapStateToProps = (state, {match: {params} }) => {
   const movieId = params.id
   let loadingState = state.reviews.moviesLoaded[movieId] || "notSarted"
   return {
-   movies: state.movies.movieList.find(movie => movie.id == movieId),
-   reviews: state.reviews.reviewList.filter(review =>  review.movie.id == movieId),
+   movie: state.movies.movieList.find(movie => movie.id == movieId),
+   reviews: state.reviews.reviewList.filter(review =>  review.movie_id == movieId),
    loadingState
   };
- 
+
 };
 
 const mapDispatchToProps = (dispatch) => {
  return {
-   DispatchfetchMovies: (movieId) => dispatch(fetchMoviesById(movieId))
+   dispatchFetchMovies: (movieId) => dispatch(fetchMoviesById(movieId))
  }
 }
 
