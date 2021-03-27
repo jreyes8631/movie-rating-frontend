@@ -25,7 +25,7 @@ export default function reviewsReducer(state = initialState, action) {
             ...state.moviesLoaded, 
             [action.payload.movie.id]: "successfull",
           },
-          reviewList: state.reviewList.concat(action.payload.reviews)
+          reviewList: state.reviewList.filter(review => review.movie_id !== action.payload.movie.id).concat(action.payload.reviews)
 
          };
         default: 
