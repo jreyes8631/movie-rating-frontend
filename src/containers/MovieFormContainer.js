@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
+import {connect} from 'react-redux';
+import {createMovie} from '../actions/movies'
 
-export default class MovieFormContainer extends Component {
+ class MovieFormContainer extends Component {
  
   state = {
     title: '',
@@ -20,17 +22,7 @@ export default class MovieFormContainer extends Component {
 
   handleSubmit = (e) => {
    e.preventDefault();
-   fetch('http://localhost:3001/movies', {
-       method: 'POST',
-       headers: {
-           'Accept': 'application/json',
-           'Content-Type': 'application/json'
-       },
-       body: JSON.stringify({movie: this.state})
-   })
-
-   .then(res => res.json())
-   .then(movieJson => {
+  this.props.dispachedCreateMovie(this.state).then(movieJson => {
     this.props.history.push('/')
    })
 
@@ -120,3 +112,17 @@ export default class MovieFormContainer extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispachedCreateMovie: (fromData) => dispatch(createMovie(fromData))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieFormContainer)
