@@ -1,4 +1,5 @@
 import { 
+    SUCCESSFULLY_CREATED_REVIEW,
     SUCCESSFULLY_LOADED_MOVIE_REVIEWS,
     START_LOADING_MOVIE
 } from '../actions';
@@ -28,6 +29,13 @@ export default function reviewsReducer(state = initialState, action) {
           reviewList: state.reviewList.filter(review => review.movie_id !== action.payload.movie.id).concat(action.payload.reviews)
 
          };
+        
+        case SUCCESSFULLY_CREATED_REVIEW:
+            return {
+                ...state,
+                reviewList: state.reviewList.concat.apply(action.payload)
+            }
+
         default: 
         return state;
     }

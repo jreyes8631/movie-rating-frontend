@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import {connect} from 'react-redux';
 import {createMovie} from '../actions/movies'
 
- class MovieFormContainer extends Component {
+class MovieFormContainer extends Component {
  
   state = {
     title: '',
@@ -45,6 +45,8 @@ import {createMovie} from '../actions/movies'
                 
                 <fieldset>
                  <h1 className="w-full p-4 bg-blue-300 mt-4 text-center text-3xl font-semibold mb-2">New Movie</h1>
+                 
+                    <p className="h-8 pl-4 text-red-400">{this.state.errors.title}</p>
                   <label className=" w-full boder p-2 my-2 block uppercase"> Movie Name</label>
                     <input 
                     type="text"
@@ -54,7 +56,8 @@ import {createMovie} from '../actions/movies'
                     placeholder="Title"
                     className="w-full border p-4 my-4"
                     />
-                  
+
+                    <p className="h-8 pl-4 text-red-400">{this.state.errors.genre}</p>
                     <label className=" w-full boder p-2 my-2 block uppercase"> Genre</label>
                     <input 
                     type="text"
@@ -64,7 +67,8 @@ import {createMovie} from '../actions/movies'
                     value={this.state.genre}
                     className="w-full border p-4 my-4"
                     />
-                    
+
+                    <p className="h-8 pl-4 text-red-400">{this.state.errors.classification}</p>
                     <label className="w-full boder p-2 my-2 block uppercase"> Classification</label>
                     <input 
                     type="text"
@@ -75,6 +79,7 @@ import {createMovie} from '../actions/movies'
                     className="w-full border p-4 my-4"
                     />
                     
+                    <p className="h-8 pl-4 text-red-400">{this.state.errors.duration}</p>
                     <label className="w-full boder p-2 my-2 block uppercase"> Duration</label>
                     <input 
                         type="text"
@@ -85,6 +90,7 @@ import {createMovie} from '../actions/movies'
                         className="w-full border p-4 my-4"
                     />
 
+                    <p className="h-8 pl-4 text-red-400">{this.state.errors.release_date}</p>
                     <label className="w-full boder p-2 my-2 block uppercase"> Release date</label>
                     <input 
                         type="date"
@@ -94,7 +100,8 @@ import {createMovie} from '../actions/movies'
                         value={this.state.release_date}
                         className="w-full border p-4 my-4"
                     />
-
+                    
+                    <p className="h-8 pl-4 text-red-400">{this.state.errors.director}</p>
                     <label className="w-full p-2 my-2 block uppercase"> Director</label>
                     <input 
                         type="text"
@@ -104,7 +111,8 @@ import {createMovie} from '../actions/movies'
                         value={this.state.director}
                         className="w-full border p-4 my-4"
                     />
-
+                    
+                    <p className="h-8 pl-4 text-red-400">{this.state.errors.description}</p>
                     <label className="w-full p-2 my-2 block uppercase"> Description</label>
                     <textarea 
                         type="text"
@@ -130,4 +138,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieFormContainer)
+export default connect(null, mapDispatchToProps)(MovieFormContainer)

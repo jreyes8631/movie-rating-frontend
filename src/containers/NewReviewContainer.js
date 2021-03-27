@@ -1,12 +1,15 @@
 import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {createReview} from '../actions/reviews'
 
-export default class NewReviewContainer extends Component {
+class NewReviewContainer extends Component {
 
 
     state = {
         comment: "",
-        rating: ""
+        rating: "",
+        errors: {}
     }
   
    handleChange = (e) =>{
@@ -17,25 +20,27 @@ export default class NewReviewContainer extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const movieId = this.props.match.params.movie_id
-    fetch(`http://localhost:3001/movies/${movieId}/reviews`, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({review: this.state})
-    })
-    
-
-    .then(res => res.json())
-    .then(reviewJson => {
-        console.log(reviewJson);
-       this.props.history.push(`/movies/${movieId}/reviews`) 
+    const form = e.target
+    const formData = new FormData();
+    formData.append("review[comment]", form.comment.value);
+    formData.append("review[rating]", form.rating.value);
+    formData.append("review[movie_id]", this.props.match.params.movie_id);
+      this.props.dispachedCreateReview(formData).then(reviewJson => {
+        this.props.history.push(`/movies/${this.props.match.params.movie_id}`)
    })
-   
+
+    .catch(errors => {
+        this.setState({
+            errors
+        })
+        console.log(errors)
+    })
+
 
   }
+
+
+  
     
 
     render(){
@@ -52,7 +57,6 @@ export default class NewReviewContainer extends Component {
                         id="comment"
                         placeholder="comment"
                         onChange={this.handleChange}
-                        value={this.state.comment}
                         className="w-full border-2 p-4 my-4"
                     />
                 </fieldset>
@@ -66,9 +70,9 @@ export default class NewReviewContainer extends Component {
                         id="rating"
                         placeholder="rating"
                         onChange={this.handleChange}
-                        value={this.state.rating}
                         className="w-full border-2 p-4 my-4"
                     />
+                    
                 </fieldset>
                 
                 <button className="w-full p-4 bg-blue-300 mt-4 hover:bg-blue-400 transition-all duration-200" type="submit"> Add Review</button>
@@ -80,3 +84,12 @@ export default class NewReviewContainer extends Component {
     }
 
 }
+
+const mapDispatchToProps = (dispatch) => {
+  
+    return {
+        dispachedCreateReview: (formData) => dispatch(createReview(formData))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(NewReviewContainer)
