@@ -1,6 +1,5 @@
 # movie-rating-frontend
 
-Inventory-Tracker
 
 Introduction:
 
