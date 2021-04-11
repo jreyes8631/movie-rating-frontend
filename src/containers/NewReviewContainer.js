@@ -50,6 +50,7 @@ class NewReviewContainer extends Component {
                 
                 <fieldset>
                  <h1 className="w-full p-4 bg-blue-300 mt-4 text-center text-3xl font-semibold mb-2">New Review</h1>
+                  <p className="h-8 pl-4 text-red-400">{this.state.errors.comment}</p>
                     <label htmlFor="comment" className="w-full p-2 my-2 block uppercase"> Comment</label>
                     <input 
                         type="text"
@@ -62,7 +63,7 @@ class NewReviewContainer extends Component {
                 </fieldset>
 
                 <fieldset>
-
+                    <p className="h-8 pl-4 text-red-400">{this.state.errors.rating}</p>
                     <label htmlFor="rating" className="w-full p-2 my-2 block uppercase"> Rating</label>
                     <input 
                         type="text"
