@@ -32,6 +32,13 @@ function App() {
           New Movie
         </NavLink>
 
+        <NavLink 
+          className="inline-block p-2" to="/reviews"
+          activeClassName="text-yellow-300"
+        >
+          Reviews
+        </NavLink>
+
           
 
 
