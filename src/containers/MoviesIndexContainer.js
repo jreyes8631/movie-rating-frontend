@@ -5,26 +5,26 @@ import MovieList from '../components/MovieList';
 
 export class MoviesIndexContainer extends Component {
 
-
-
-    componentDidMount() {
+  componentDidMount() {
      this.props.DispatchfetchMovies();
-    }
+  } 
 
-    render(){
-        if (this.props.loadingState === 'notStarted'){
-            return null
-        }
-        return (
-            <section className="max-w-6xl w-11/12 mx-auto mt-16">
-               { this.props.loadingState === 'inProgress' ? (
-                   'loading content') : (
-                   <MovieList movies={this.props.movies}/>
-                   
-                   )} 
-            </section>
-        )
+  render(){
+    if (this.props.loadingState === 'notStarted'){
+        return null
     }
+    return (
+        <>
+        <button onClick={this.handleClick} className="inline-block border border-blue-500 rounded py-2 px-3 mt-6 bg-blue-500 text-white mx-0.5">Sort By Name</button>
+            <section className="max-w-6xl w-11/12 mx-auto mt-16">
+            { this.props.loadingState === 'inProgress' ? (
+                'loading content') : (
+                <MovieList movies={this.props.movies}/> )} 
+            </section>
+      </> 
+    )
+  
+  }
 }
 
 const mapStateToProps = (state) => {
