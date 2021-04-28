@@ -5,6 +5,14 @@ import MovieList from '../components/MovieList';
 
 export class MoviesIndexContainer extends Component {
 
+  state = {
+    sorted: false,
+  }
+
+  handleClick = () => {
+    this.setState({sorted: !this.state.sorted})
+  }
+
   componentDidMount() {
      this.props.DispatchfetchMovies();
   } 
@@ -19,7 +27,11 @@ export class MoviesIndexContainer extends Component {
             <section className="max-w-6xl w-11/12 mx-auto mt-16">
             { this.props.loadingState === 'inProgress' ? (
                 'loading content') : (
-                <MovieList movies={this.props.movies}/> )} 
+
+                  this.state.sorted ? <MovieList movies={[...this.props.movies].sort((a,b) => {
+                    return a.title.localeCompare(b.title)
+                  })}/> : <MovieList movies={this.props.movies}/> )} 
+                  
             </section>
       </> 
     )
