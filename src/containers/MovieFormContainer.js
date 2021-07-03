@@ -12,6 +12,7 @@ class MovieFormContainer extends Component {
     release_date: '',
     director: '',
     description: '',
+    poster: '',
     errors: {}
   }
 
@@ -23,6 +24,16 @@ class MovieFormContainer extends Component {
 
   handleSubmit = (e) => {
    e.preventDefault();
+   const form = e.target
+   const formData = new FormData()
+   formData.append('event[title]', form.title.value)
+   formData.append('event[genre]', form.genre.value)
+   formData.append('event[classification]', form.classification.value)
+   formData.append('event[duration]', form.duration.value)
+   formData.append('event[release_date]', form.release_date.value)
+   formData.append('event[director]', form.director.value)
+   formData.append('event[description]', form.description.value)
+   formData.append('event[poster]', form.poster.files[0], form.poster.value)
   this.props.dispachedCreateMovie(this.state).then(movieJson => {
     this.props.history.push('/')
    })
@@ -121,6 +132,16 @@ class MovieFormContainer extends Component {
                         onChange={this.handleChange}
                         value={this.state.description}
                         className="w-full border p-4 my-4"
+                    />
+
+                    <input
+                    type="file"
+                    name="poster"
+                    id="poster"
+                    onChange={this.handleChange}
+                    value={this.state.poster}
+                    className="w-full border p-4 my-4"
+                    placeholder="poster"
                     />
 
                 </fieldset>
